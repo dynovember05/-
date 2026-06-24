@@ -373,6 +373,18 @@ a {
   background: #fff;
 }
 
+.history-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+.history-item p {
+  margin: 6px 0 0;
+  color: var(--muted);
+}
+
 .result-item.correct {
   border-color: #9bd4b6;
 }
@@ -456,6 +468,11 @@ a {
   }
 
   .exam-nav {
+    flex-direction: column;
+  }
+
+  .history-item {
+    align-items: stretch;
     flex-direction: column;
   }
 }

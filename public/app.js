@@ -366,13 +366,61 @@ function renderHistory(histories) {
         .map(
           (item) => `
           <div class="history-item">
-            <strong>${escapeHtml(item.title)}</strong>
-            <p>${new Date(item.submittedAt).toLocaleString("ko-KR")} · ${item.score}/${item.maxScore}점 · ${item.mode === "ai" ? "AI 채점" : "브라우저 채점"}</p>
+            <div>
+              <strong>${escapeHtml(item.title)}</strong>
+              <p>${new Date(item.submittedAt).toLocaleString("ko-KR")} · ${item.score}/${item.maxScore}점 · ${item.mode === "ai" ? "AI 채점" : "브라우저 채점"}</p>
+            </div>
+            <button class="button secondary" data-action="view-history" data-history-id="${escapeHtml(item.id)}">기록 보기</button>
           </div>
         `
         )
         .join("")}
     </div>
+  `;
+}
+
+function renderHistoryDetail(historyId) {
+  const history = loadHistory().find((item) => item.id === historyId);
+  if (!history) {
+    renderHome();
+    return;
+  }
+
+  app.innerHTML = `
+    <header class="topbar">
+      <div class="title-group">
+        <h1>${escapeHtml(history.title)}</h1>
+        <p>${new Date(history.submittedAt).toLocaleString("ko-KR")} · ${history.score}/${history.maxScore}점 · ${history.mode === "ai" ? "AI 채점" : "브라우저 채점"}</p>
+      </div>
+      <button class="button secondary" data-action="home">메인으로</button>
+    </header>
+    <section class="stats-grid">
+      <div class="stat"><strong>${history.score}</strong><span>획득 점수</span></div>
+      <div class="stat"><strong>${history.maxScore}</strong><span>총점</span></div>
+      <div class="stat"><strong>${Math.round((history.score / history.maxScore) * 100)}%</strong><span>정답률</span></div>
+      <div class="stat"><strong>${history.items?.filter((item) => item.verdict === "wrong").length ?? 0}</strong><span>오답</span></div>
+    </section>
+    <section class="result-list">
+      ${(history.questions || [])
+        .map((question, index) => {
+          const item = (history.items || []).find((resultItem) => resultItem.id === question.id) || {};
+          const answer = history.answers?.[question.id] || "";
+          return `
+            <article class="result-item ${item.verdict || "wrong"}">
+              <div class="card-meta">
+                <span class="pill">${index + 1}번</span>
+                <span class="pill">${Number(item.score || 0)}/${Number(item.maxScore || 5)}</span>
+                <span class="pill ${item.verdict === "correct" ? "green" : "orange"}">${escapeHtml(item.verdict || "wrong")}</span>
+              </div>
+              <div class="question-body">${renderPromptHtml(question.prompt || "")}</div>
+              <div class="answer-preview"><strong>내 답안</strong><br>${escapeHtml(answer || "(미작성)")}</div>
+              <div class="answer-preview"><strong>기준 답안</strong><br>${escapeHtml(item.expected || question.answer || "")}</div>
+              <p>${escapeHtml(item.feedback || "피드백이 저장되지 않았습니다.")}</p>
+            </article>
+          `;
+        })
+        .join("")}
+    </section>
   `;
 }
 
@@ -578,7 +626,19 @@ async function submitAttempt() {
       score,
       maxScore,
       mode: result.mode,
-      submittedAt
+      submittedAt,
+      summary: result.summary,
+      questions: state.attempt.questions.map((question) => ({
+        id: question.id,
+        number: question.number,
+        type: question.type,
+        prompt: question.prompt,
+        answer: question.answer,
+        acceptedAnswers: question.acceptedAnswers || [],
+        sourceUrl: question.sourceUrl || state.attempt.session.sourceUrl || ""
+      })),
+      answers: { ...state.attempt.answers },
+      items: result.items.map((item) => ({ ...item }))
     },
     ...history
   ]);
@@ -650,6 +710,7 @@ app.addEventListener("click", async (event) => {
   const action = target.dataset.action;
   if (action === "home") renderHome();
   if (action === "show-sources") renderSources();
+  if (action === "view-history") renderHistoryDetail(target.dataset.historyId);
   if (action === "preview-session") renderPreview(target.dataset.sessionId);
   if (action === "start-session") startSession(target.dataset.sessionId);
   if (action === "start-random") startRandom();
