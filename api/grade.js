@@ -42,12 +42,12 @@ async function gradeWithOpenAI(payload) {
 
   const data = await openAIResponse.json();
   const text =
-    data.output_text ??
-    data.output
-      ?.flatMap((item) => item.content || [])
-      ?.map((content) => content.text)
-      ?.filter(Boolean)
-      ?.join("\n");
+    data.output_text ||
+    (data.output || [])
+      .flatMap((item) => item.content || [])
+      .map((content) => content.text)
+      .filter(Boolean)
+      .join("\n");
 
   if (!text) {
     throw new Error("OpenAI grading response did not include text output.");
@@ -56,7 +56,7 @@ async function gradeWithOpenAI(payload) {
   return JSON.parse(text);
 }
 
-export default async function handler(request, response) {
+module.exports = async function handler(request, response) {
   try {
     if (request.method === "GET") {
       response.status(200).json({ ok: true, route: "/api/grade" });
@@ -71,7 +71,7 @@ export default async function handler(request, response) {
     const payload = typeof request.body === "string" ? JSON.parse(request.body || "{}") : request.body || {};
     const result = await gradeWithOpenAI(payload);
     response.status(200).json(
-      result ?? {
+      result || {
         items: null,
         summary: "OPENAI_API_KEY 또는 OPENAI_MODEL이 없어 브라우저 채점으로 전환합니다."
       }
@@ -83,4 +83,4 @@ export default async function handler(request, response) {
       summary: `AI 채점 중 오류가 발생해 브라우저 채점으로 전환합니다. ${String(error.message || error)}`
     });
   }
-}
+};
