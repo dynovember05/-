@@ -5,6 +5,7 @@ import { extname, join, normalize, resolve } from "node:path";
 import { gradeWithOpenAI } from "./lib/grader.mjs";
 
 const root = process.cwd();
+const publicRoot = resolve(root, "public");
 const startPort = Number(process.env.PORT || 5173);
 
 function loadDotEnv() {
@@ -39,8 +40,8 @@ const contentTypes = {
 
 function safePath(urlPath) {
   const cleanPath = decodeURIComponent(urlPath.split("?")[0]);
-  const candidate = normalize(join(root, cleanPath === "/" ? "index.html" : cleanPath));
-  if (!candidate.startsWith(root)) {
+  const candidate = normalize(join(publicRoot, cleanPath === "/" ? "index.html" : cleanPath));
+  if (!candidate.startsWith(publicRoot)) {
     return null;
   }
   return candidate;

@@ -1,9 +1,9 @@
 import { mkdir, readFile, writeFile } from "node:fs/promises";
 import { dirname, resolve } from "node:path";
 
-const sourcePath = resolve("data/sources.json");
-const outputPath = resolve("data/questions.generated.json");
-const reportPath = resolve("data/scrape-report.json");
+const sourcePath = resolve("public/data/sources.json");
+const outputPath = resolve("public/data/questions.generated.json");
+const reportPath = resolve("public/data/scrape-report.json");
 
 const questionStartPattern = /(^|\n)(\d{1,2})\.\s*/g;
 
