@@ -81,23 +81,52 @@ function isCodeLine(line = "") {
   const trimmed = line.trim();
   if (!trimmed) return false;
   return (
+    /^\s{2,}\S/.test(line) ||
     /^(#include|import\s|from\s+\w+\s+import|package\s)/.test(trimmed) ||
-    /^(public|private|protected|static|class|interface|struct|typedef|enum)\b/.test(trimmed) ||
-    /^(int|char|double|float|long|short|void|boolean|String|def|for|while|if|else|elif|return|print|printf|System\.out|scanf)\b/.test(trimmed) ||
-    /^(SELECT|FROM|WHERE|JOIN|LEFT|RIGHT|INNER|OUTER|GROUP BY|ORDER BY|HAVING|CREATE|ALTER|INSERT|UPDATE|DELETE|CONSTRAINT|FOREIGN|PRIMARY|REFERENCES)\b/i.test(trimmed) ||
-    /^[{}();]+$/.test(trimmed) ||
+    /^(public|private|protected|static|class|interface|struct|typedef|enum|extends|implements)\b/.test(trimmed) ||
+    /^(int|char|double|float|long|short|void|boolean|String|def|for|while|if|else|elif|return|print|printf|System\.out|scanf|try|catch|finally|switch|case|default|break|continue)\b/.test(trimmed) ||
+    /^(SELECT|FROM|WHERE|JOIN|LEFT|RIGHT|INNER|OUTER|GROUP BY|ORDER BY|HAVING|CREATE|ALTER|INSERT|UPDATE|DELETE|CONSTRAINT|FOREIGN|PRIMARY|REFERENCES|UNION|VALUES|SET)\b/i.test(trimmed) ||
+    /^\d+\.\s*(SELECT|FROM|WHERE|JOIN|CREATE|INSERT|UPDATE|DELETE)\b/i.test(trimmed) ||
+    /^[{}()[\];,]+$/.test(trimmed) ||
     /[;{}]$/.test(trimmed) ||
-    /^\w+\s*=\s*.+/.test(trimmed) ||
-    /^\w+\s*\(.*\)\s*[:{]?$/.test(trimmed)
+    /=>|->|==|!=|<=|>=|\+\+|--|\+=|-=|\*=|\/=|%=/.test(trimmed) ||
+    /^[\w$.[\]'"]+\s*=\s*.+/.test(trimmed) ||
+    /^[\w$.[\]'"]+\s*\(.*\)\s*[:{;]?$/.test(trimmed)
   );
 }
 
-function nextMeaningfulLineIsCode(lines, startIndex) {
-  for (let index = startIndex; index < lines.length; index += 1) {
+function isCodeContinuation(line = "") {
+  const trimmed = line.trim();
+  if (!trimmed) return true;
+  return (
+    /^\s{2,}\S/.test(line) ||
+    /^[-+]?\d+(\.\d+)?[,]?$/.test(trimmed) ||
+    /^["'`].*["'`][,;]?$/.test(trimmed) ||
+    /^[A-Za-z_$][\w$]*[,]?$/.test(trimmed) ||
+    /^[\w가-힣\s.'"%-]+[,]$/.test(trimmed) ||
+    /^[)\]}][,;]?$/.test(trimmed)
+  );
+}
+
+function nearestMeaningfulLineIsCode(lines, startIndex, direction) {
+  for (let index = startIndex; index >= 0 && index < lines.length; index += direction) {
     if (!lines[index].trim()) continue;
     return isCodeLine(lines[index]);
   }
   return false;
+}
+
+function shouldRenderLineAsCode(lines, index, currentType) {
+  const line = lines[index];
+  if (isCodeLine(line)) return true;
+
+  const previousCode = nearestMeaningfulLineIsCode(lines, index - 1, -1);
+  const nextCode = nearestMeaningfulLineIsCode(lines, index + 1, 1);
+  if (isCodeContinuation(line) && (currentType === "code" || (previousCode && nextCode))) {
+    return true;
+  }
+
+  return currentType === "code" && !line.trim() && nextCode;
 }
 
 function renderPromptHtml(prompt = "") {
@@ -115,7 +144,7 @@ function renderPromptHtml(prompt = "") {
 
   for (let index = 0; index < lines.length; index += 1) {
     const line = lines[index];
-    const codeLine = isCodeLine(line) || (current.type === "code" && !line.trim() && nextMeaningfulLineIsCode(lines, index + 1));
+    const codeLine = shouldRenderLineAsCode(lines, index, current.type);
     const type = codeLine ? "code" : "text";
 
     if (current.type !== type) {
