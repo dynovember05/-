@@ -31,6 +31,7 @@ body {
     BlinkMacSystemFont,
     "Segoe UI",
     sans-serif;
+  -webkit-text-size-adjust: 100%;
 }
 
 button,
@@ -93,6 +94,7 @@ a {
   background: var(--brand);
   color: #fff;
   font-weight: 700;
+  text-align: center;
 }
 
 .button.secondary {
@@ -252,6 +254,7 @@ a {
   border-radius: 8px;
   background: var(--panel);
   padding: 18px;
+  min-width: 0;
 }
 
 .panel h2,
@@ -261,6 +264,7 @@ a {
 
 .question-card {
   padding: 20px;
+  min-width: 0;
 }
 
 .question-header {
@@ -273,6 +277,7 @@ a {
 .question-body {
   overflow-wrap: anywhere;
   line-height: 1.68;
+  min-width: 0;
 }
 
 .question-text {
@@ -301,6 +306,7 @@ a {
   font-size: 14px;
   line-height: 1.55;
   white-space: pre;
+  -webkit-overflow-scrolling: touch;
 }
 
 .code-block code {
@@ -442,6 +448,10 @@ a {
     justify-content: flex-start;
   }
 
+  .two-column .panel {
+    order: -1;
+  }
+
   .stats-grid,
   .session-grid {
     grid-template-columns: repeat(2, minmax(0, 1fr));
@@ -454,25 +464,118 @@ a {
 
 @media (max-width: 620px) {
   .app-shell {
-    width: min(100% - 20px, 1180px);
-    padding-top: 18px;
+    width: 100%;
+    padding: 14px 10px 36px;
   }
 
-  .stats-grid,
+  .topbar {
+    gap: 12px;
+    margin-bottom: 16px;
+  }
+
+  .title-group h1 {
+    font-size: 23px;
+    line-height: 1.28;
+  }
+
+  .title-group p {
+    font-size: 14px;
+  }
+
+  .toolbar,
+  .session-actions,
+  .exam-nav {
+    width: 100%;
+  }
+
+  .toolbar .button,
+  .session-actions .button,
+  .exam-nav .button,
+  .history-item .button {
+    flex: 1 1 100%;
+    width: 100%;
+    min-height: 44px;
+  }
+
+  .stats-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 8px;
+  }
+
+  .stat {
+    padding: 12px;
+  }
+
+  .stat strong {
+    font-size: 22px;
+  }
+
   .session-grid {
     grid-template-columns: 1fr;
   }
 
-  .title-group h1 {
-    font-size: 24px;
+  .session-card,
+  .panel,
+  .question-card {
+    padding: 14px;
+    box-shadow: none;
   }
 
   .exam-nav {
     flex-direction: column;
   }
 
+  .question-header {
+    flex-direction: column;
+    gap: 8px;
+  }
+
+  .question-map {
+    grid-template-columns: repeat(5, minmax(42px, 1fr));
+    gap: 6px;
+  }
+
+  .map-button {
+    min-height: 42px;
+  }
+
+  .answer-box {
+    min-height: 220px;
+    font-size: 16px;
+  }
+
+  .code-block {
+    border-radius: 6px;
+    padding: 12px;
+    font-size: 13px;
+    line-height: 1.5;
+  }
+
+  .filter-row {
+    margin: 12px 0;
+  }
+
+  .input,
+  .select {
+    font-size: 16px;
+  }
+
   .history-item {
     align-items: stretch;
     flex-direction: column;
+  }
+
+  .answer-preview {
+    overflow-wrap: anywhere;
+  }
+}
+
+@media (max-width: 380px) {
+  .stats-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .question-map {
+    grid-template-columns: repeat(4, minmax(42px, 1fr));
   }
 }
