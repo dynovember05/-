@@ -1,0 +1,37 @@
+{
+  "generatedAt": "2026-06-24T00:00:00.000Z",
+  "sourceNotice": "샘플 문제는 앱 기능 확인용으로 직접 작성한 연습 문항입니다. 전체 복원 문제 데이터는 스크래퍼를 실행해 생성하세요.",
+  "sessions": [
+    {
+      "id": "sample-20",
+      "year": 2026,
+      "round": 0,
+      "title": "기능 확인용 샘플 20문제",
+      "description": "실제 회차 데이터가 생성되기 전 풀이, 자동 저장, 채점 흐름을 확인하는 세트입니다.",
+      "sourceUrl": "",
+      "restored": false,
+      "questions": [
+        { "id": "sample-20-1", "number": 1, "type": "단답형", "prompt": "데이터베이스에서 트랜잭션의 원자성, 일관성, 고립성, 지속성을 묶어 부르는 약어를 쓰시오.", "answer": "ACID", "acceptedAnswers": ["ACID"] },
+        { "id": "sample-20-2", "number": 2, "type": "단답형", "prompt": "관계형 데이터베이스에서 중복을 줄이고 이상 현상을 방지하기 위해 테이블을 분해하는 과정을 쓰시오.", "answer": "정규화", "acceptedAnswers": ["정규화", "Normalization"] },
+        { "id": "sample-20-3", "number": 3, "type": "단답형", "prompt": "SQL에서 조건에 맞는 행만 조회하기 위해 사용하는 절을 쓰시오.", "answer": "WHERE", "acceptedAnswers": ["WHERE", "where절"] },
+        { "id": "sample-20-4", "number": 4, "type": "서술형", "prompt": "소프트웨어 테스트에서 회귀 테스트의 목적을 간단히 설명하시오.", "answer": "변경 후 기존 기능에 결함이 새로 생기지 않았는지 확인하는 테스트", "acceptedAnswers": ["변경 후 기존 기능에 결함이 새로 생기지 않았는지 확인", "수정 후 기존 기능 영향 확인"] },
+        { "id": "sample-20-5", "number": 5, "type": "단답형", "prompt": "객체지향에서 내부 구현을 숨기고 필요한 기능만 외부에 공개하는 원칙을 쓰시오.", "answer": "캡슐화", "acceptedAnswers": ["캡슐화", "Encapsulation"] },
+        { "id": "sample-20-6", "number": 6, "type": "단답형", "prompt": "HTTP에서 리소스 생성을 요청할 때 주로 사용하는 메서드를 쓰시오.", "answer": "POST", "acceptedAnswers": ["POST"] },
+        { "id": "sample-20-7", "number": 7, "type": "단답형", "prompt": "네트워크에서 IP 주소를 MAC 주소로 변환하는 프로토콜을 쓰시오.", "answer": "ARP", "acceptedAnswers": ["ARP"] },
+        { "id": "sample-20-8", "number": 8, "type": "단답형", "prompt": "비밀키 하나로 암호화와 복호화를 모두 수행하는 암호 방식을 쓰시오.", "answer": "대칭키 암호화", "acceptedAnswers": ["대칭키", "대칭키 암호화", "비밀키 암호화"] },
+        { "id": "sample-20-9", "number": 9, "type": "단답형", "prompt": "웹 페이지 전체를 다시 불러오지 않고 비동기적으로 일부 데이터를 갱신하는 기술을 쓰시오.", "answer": "AJAX", "acceptedAnswers": ["AJAX"] },
+        { "id": "sample-20-10", "number": 10, "type": "단답형", "prompt": "XML 기반 웹 서비스에서 메시지 교환을 위한 프로토콜을 쓰시오.", "answer": "SOAP", "acceptedAnswers": ["SOAP"] },
+        { "id": "sample-20-11", "number": 11, "type": "단답형", "prompt": "하향식 통합 테스트에서 아직 구현되지 않은 하위 모듈을 대신하는 임시 모듈을 쓰시오.", "answer": "스텁", "acceptedAnswers": ["스텁", "Stub"] },
+        { "id": "sample-20-12", "number": 12, "type": "단답형", "prompt": "상향식 통합 테스트에서 상위 모듈 역할을 대신하는 테스트용 모듈을 쓰시오.", "answer": "드라이버", "acceptedAnswers": ["드라이버", "Driver"] },
+        { "id": "sample-20-13", "number": 13, "type": "단답형", "prompt": "소프트웨어 모듈 내부 요소들이 하나의 기능을 수행할 때 가장 높은 응집도를 쓰시오.", "answer": "기능적 응집도", "acceptedAnswers": ["기능적 응집도", "기능 응집도"] },
+        { "id": "sample-20-14", "number": 14, "type": "단답형", "prompt": "클래스의 인스턴스가 하나만 생성되도록 보장하는 GoF 생성 패턴을 쓰시오.", "answer": "싱글턴", "acceptedAnswers": ["싱글턴", "Singleton", "싱글톤"] },
+        { "id": "sample-20-15", "number": 15, "type": "단답형", "prompt": "한 객체의 상태 변화가 의존 객체들에게 자동으로 통지되는 GoF 행위 패턴을 쓰시오.", "answer": "옵서버", "acceptedAnswers": ["옵서버", "Observer"] },
+        { "id": "sample-20-16", "number": 16, "type": "단답형", "prompt": "C언어에서 문자열 끝을 나타내는 널 문자의 표기를 쓰시오.", "answer": "\\0", "acceptedAnswers": ["\\0", "널 문자", "NULL 문자"] },
+        { "id": "sample-20-17", "number": 17, "type": "단답형", "prompt": "파이썬에서 리스트의 마지막 원소부터 역순으로 접근하는 슬라이싱 표현을 쓰시오.", "answer": "[::-1]", "acceptedAnswers": ["[::-1]"] },
+        { "id": "sample-20-18", "number": 18, "type": "단답형", "prompt": "보안에서 정상 사이트에 악성코드를 심어 특정 방문자를 감염시키는 공격을 쓰시오.", "answer": "워터링 홀", "acceptedAnswers": ["워터링 홀", "Watering Hole"] },
+        { "id": "sample-20-19", "number": 19, "type": "서술형", "prompt": "살충제 패러독스의 의미를 간단히 설명하시오.", "answer": "같은 테스트를 반복하면 더 이상 새로운 결함을 찾기 어려워 테스트 케이스를 개선해야 한다는 원리", "acceptedAnswers": ["같은 테스트를 반복하면 새로운 결함을 찾기 어렵다", "반복 테스트는 테스트 케이스 개선이 필요하다"] },
+        { "id": "sample-20-20", "number": 20, "type": "단답형", "prompt": "브라우저와 서버가 무상태 HTTP에서 사용자를 식별하기 위해 저장하는 작은 데이터 조각을 쓰시오.", "answer": "쿠키", "acceptedAnswers": ["쿠키", "Cookie"] }
+      ]
+    }
+  ]
+}

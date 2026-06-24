@@ -1,0 +1,26 @@
+{
+  "checkedAt": "2026-06-24",
+  "note": "정보처리기사 실기 문제는 공식 공개본이 아니라 응시자 기억 기반 복원 자료로 확인됩니다. 각 회차의 원문 출처 URL을 보존합니다.",
+  "sources": [
+    { "id": "2026-1", "year": 2026, "round": 1, "url": "https://chobopark.tistory.com/561" },
+    { "id": "2025-1", "year": 2025, "round": 1, "url": "https://chobopark.tistory.com/540" },
+    { "id": "2025-2", "year": 2025, "round": 2, "url": "https://chobopark.tistory.com/554" },
+    { "id": "2025-3", "year": 2025, "round": 3, "url": "https://chobopark.tistory.com/558" },
+    { "id": "2024-1", "year": 2024, "round": 1, "url": "https://chobopark.tistory.com/476" },
+    { "id": "2024-2", "year": 2024, "round": 2, "url": "https://chobopark.tistory.com/483" },
+    { "id": "2024-3", "year": 2024, "round": 3, "url": "https://chobopark.tistory.com/495" },
+    { "id": "2023-1", "year": 2023, "round": 1, "url": "https://chobopark.tistory.com/372" },
+    { "id": "2023-2", "year": 2023, "round": 2, "url": "https://chobopark.tistory.com/420" },
+    { "id": "2023-3", "year": 2023, "round": 3, "url": "https://chobopark.tistory.com/453" },
+    { "id": "2022-1", "year": 2022, "round": 1, "url": "https://chobopark.tistory.com/271" },
+    { "id": "2022-2", "year": 2022, "round": 2, "url": "https://chobopark.tistory.com/423" },
+    { "id": "2022-3", "year": 2022, "round": 3, "url": "https://chobopark.tistory.com/424" },
+    { "id": "2021-1", "year": 2021, "round": 1, "url": "https://chobopark.tistory.com/191" },
+    { "id": "2021-2", "year": 2021, "round": 2, "url": "https://chobopark.tistory.com/210" },
+    { "id": "2021-3", "year": 2021, "round": 3, "url": "https://chobopark.tistory.com/217" },
+    { "id": "2020-1", "year": 2020, "round": 1, "url": "https://chobopark.tistory.com/196" },
+    { "id": "2020-2", "year": 2020, "round": 2, "url": "https://chobopark.tistory.com/195" },
+    { "id": "2020-3", "year": 2020, "round": 3, "url": "https://chobopark.tistory.com/194" },
+    { "id": "2020-4", "year": 2020, "round": 4, "url": "https://chobopark.tistory.com/192" }
+  ]
+}
